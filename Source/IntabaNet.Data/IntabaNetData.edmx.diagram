@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="34a8f9c24a0c4c0dbf1c888a938831d1" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="IntabaNet.Data.Agent" Width="1.5" PointX="5.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntabaNet.Data.AgentStatus" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntabaNet.Data.AgentType" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntabaNet.Data.Intermediary" Width="1.5" PointX="3.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntabaNet.Data.Licensee" Width="1.5" PointX="3.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntabaNet.Data.LicenseeType" Width="1.5" PointX="0.875" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntabaNet.Data.Product" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntabaNet.Data.ProductUnderwriter" Width="1.5" PointX="8.125" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntabaNet.Data.Sale" Width="1.5" PointX="5.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntabaNet.Data.Underwriter" Width="1.5" PointX="10.5" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="IntabaNet.Data.FK_Agent_AgentStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="IntabaNet.Data.FK_Agent_AgentType" ManuallyRouted="false" />
+        <AssociationConnector Association="IntabaNet.Data.FK_Agent_Licensee" ManuallyRouted="false" />
+        <AssociationConnector Association="IntabaNet.Data.FK_Sale_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="IntabaNet.Data.FK_Intermediary_Licensee" ManuallyRouted="false" />
+        <AssociationConnector Association="IntabaNet.Data.FK_Licensee_LicenseeType" ManuallyRouted="false" />
+        <AssociationConnector Association="IntabaNet.Data.FK_Product_Product1" ManuallyRouted="false" />
+        <AssociationConnector Association="IntabaNet.Data.FK_ProductUnderwriter_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="IntabaNet.Data.FK_Sale_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="IntabaNet.Data.FK_ProductUnderwriter_Underwriter" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

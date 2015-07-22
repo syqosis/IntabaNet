@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntabaNet.Data", "IntabaNet.Data\IntabaNet.Data.csproj", "{B3B1BA00-9E4D-4885-8087-9F7F9C3613D0}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "IntabaNet.Modeling", "IntabaNet.Modeling\IntabaNet.Modeling.modelproj", "{066AD119-EFA3-4AA1-A280-ADA3223963D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3B1BA00-9E4D-4885-8087-9F7F9C3613D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B1BA00-9E4D-4885-8087-9F7F9C3613D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B1BA00-9E4D-4885-8087-9F7F9C3613D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B1BA00-9E4D-4885-8087-9F7F9C3613D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{066AD119-EFA3-4AA1-A280-ADA3223963D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{066AD119-EFA3-4AA1-A280-ADA3223963D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{066AD119-EFA3-4AA1-A280-ADA3223963D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{066AD119-EFA3-4AA1-A280-ADA3223963D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

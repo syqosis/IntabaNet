@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IntabaNet.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenseeID" Type="int" Nullable="false" />
+          <Property Name="AgentTypeID" Type="int" Nullable="false" />
+          <Property Name="AgentStatusID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AgentStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Intermediary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenseeID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Licensee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenseeTypeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LicenseeType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductUnderwriter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="UnderwriterID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Underwriter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Agent_AgentStatus">
+          <End Role="AgentStatus" Type="Self.AgentStatus" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="AgentStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_AgentType">
+          <End Role="AgentType" Type="Self.AgentType" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="AgentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Licensee">
+          <End Role="Licensee" Type="Self.Licensee" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licensee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="LicenseeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Intermediary_Licensee">
+          <End Role="Licensee" Type="Self.Licensee" Multiplicity="0..1" />
+          <End Role="Intermediary" Type="Self.Intermediary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licensee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Intermediary">
+              <PropertyRef Name="LicenseeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Licensee_LicenseeType">
+          <End Role="LicenseeType" Type="Self.LicenseeType" Multiplicity="1" />
+          <End Role="Licensee" Type="Self.Licensee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenseeType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Licensee">
+              <PropertyRef Name="LicenseeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Product1">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product1" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductUnderwriter_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductUnderwriter" Type="Self.ProductUnderwriter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductUnderwriter">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductUnderwriter_Underwriter">
+          <End Role="Underwriter" Type="Self.Underwriter" Multiplicity="1" />
+          <End Role="ProductUnderwriter" Type="Self.ProductUnderwriter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Underwriter">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductUnderwriter">
+              <PropertyRef Name="UnderwriterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IntabaNetDataStoreContainer">
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgentStatus" EntityType="Self.AgentStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgentType" EntityType="Self.AgentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Intermediary" EntityType="Self.Intermediary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Licensee" EntityType="Self.Licensee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LicenseeType" EntityType="Self.LicenseeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductUnderwriter" EntityType="Self.ProductUnderwriter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Underwriter" EntityType="Self.Underwriter" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Agent_AgentStatus" Association="Self.FK_Agent_AgentStatus">
+            <End Role="AgentStatus" EntitySet="AgentStatus" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_AgentType" Association="Self.FK_Agent_AgentType">
+            <End Role="AgentType" EntitySet="AgentType" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Licensee" Association="Self.FK_Agent_Licensee">
+            <End Role="Licensee" EntitySet="Licensee" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intermediary_Licensee" Association="Self.FK_Intermediary_Licensee">
+            <End Role="Licensee" EntitySet="Licensee" />
+            <End Role="Intermediary" EntitySet="Intermediary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Licensee_LicenseeType" Association="Self.FK_Licensee_LicenseeType">
+            <End Role="LicenseeType" EntitySet="LicenseeType" />
+            <End Role="Licensee" EntitySet="Licensee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Product1" Association="Self.FK_Product_Product1">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product1" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductUnderwriter_Product" Association="Self.FK_ProductUnderwriter_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductUnderwriter" EntitySet="ProductUnderwriter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductUnderwriter_Underwriter" Association="Self.FK_ProductUnderwriter_Underwriter">
+            <End Role="Underwriter" EntitySet="Underwriter" />
+            <End Role="ProductUnderwriter" EntitySet="ProductUnderwriter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Agent" Association="Self.FK_Sale_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Product" Association="Self.FK_Sale_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IntabaNet.Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicenseeID" Type="Int32" Nullable="false" />
+          <Property Name="AgentTypeID" Type="Int32" Nullable="false" />
+          <Property Name="AgentStatusID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AgentStatus" Relationship="Self.FK_Agent_AgentStatus" FromRole="Agent" ToRole="AgentStatus" />
+          <NavigationProperty Name="AgentType" Relationship="Self.FK_Agent_AgentType" FromRole="Agent" ToRole="AgentType" />
+          <NavigationProperty Name="Licensee" Relationship="Self.FK_Agent_Licensee" FromRole="Agent" ToRole="Licensee" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sale_Agent" FromRole="Agent" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="AgentStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_Agent_AgentStatus" FromRole="AgentStatus" ToRole="Agent" />
+        </EntityType>
+        <EntityType Name="AgentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_Agent_AgentType" FromRole="AgentType" ToRole="Agent" />
+        </EntityType>
+        <EntityType Name="Intermediary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicenseeID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Licensee" Relationship="Self.FK_Intermediary_Licensee" FromRole="Intermediary" ToRole="Licensee" />
+        </EntityType>
+        <EntityType Name="Licensee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicenseeTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_Agent_Licensee" FromRole="Licensee" ToRole="Agent" />
+          <NavigationProperty Name="Intermediaries" Relationship="Self.FK_Intermediary_Licensee" FromRole="Licensee" ToRole="Intermediary" />
+          <NavigationProperty Name="LicenseeType" Relationship="Self.FK_Licensee_LicenseeType" FromRole="Licensee" ToRole="LicenseeType" />
+        </EntityType>
+        <EntityType Name="LicenseeType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Licensees" Relationship="Self.FK_Licensee_LicenseeType" FromRole="LicenseeType" ToRole="Licensee" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product1" Relationship="Self.FK_Product_Product1" FromRole="Product" ToRole="Product1" />
+          <NavigationProperty Name="Product2" Relationship="Self.FK_Product_Product1" FromRole="Product1" ToRole="Product" />
+          <NavigationProperty Name="ProductUnderwriters" Relationship="Self.FK_ProductUnderwriter_Product" FromRole="Product" ToRole="ProductUnderwriter" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sale_Product" FromRole="Product" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="ProductUnderwriter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="UnderwriterID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductUnderwriter_Product" FromRole="ProductUnderwriter" ToRole="Product" />
+          <NavigationProperty Name="Underwriter" Relationship="Self.FK_ProductUnderwriter_Underwriter" FromRole="ProductUnderwriter" ToRole="Underwriter" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Agent" Relationship="Self.FK_Sale_Agent" FromRole="Sale" ToRole="Agent" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Sale_Product" FromRole="Sale" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Underwriter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ProductUnderwriters" Relationship="Self.FK_ProductUnderwriter_Underwriter" FromRole="Underwriter" ToRole="ProductUnderwriter" />
+        </EntityType>
+        <Association Name="FK_Agent_AgentStatus">
+          <End Role="AgentStatus" Type="IntabaNet.Data.AgentStatus" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="AgentStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_AgentType">
+          <End Role="AgentType" Type="Self.AgentType" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgentType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="AgentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Licensee">
+          <End Role="Licensee" Type="Self.Licensee" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licensee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="LicenseeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Intermediary_Licensee">
+          <End Role="Licensee" Type="Self.Licensee" Multiplicity="0..1" />
+          <End Role="Intermediary" Type="Self.Intermediary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licensee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Intermediary">
+              <PropertyRef Name="LicenseeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Licensee_LicenseeType">
+          <End Role="LicenseeType" Type="Self.LicenseeType" Multiplicity="1" />
+          <End Role="Licensee" Type="Self.Licensee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenseeType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Licensee">
+              <PropertyRef Name="LicenseeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Product1">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product1" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductUnderwriter_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductUnderwriter" Type="Self.ProductUnderwriter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductUnderwriter">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductUnderwriter_Underwriter">
+          <End Role="Underwriter" Type="Self.Underwriter" Multiplicity="1" />
+          <End Role="ProductUnderwriter" Type="Self.ProductUnderwriter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Underwriter">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductUnderwriter">
+              <PropertyRef Name="UnderwriterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IntabaNetData" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="Self.Agent" />
+          <EntitySet Name="AgentStatus1" EntityType="IntabaNet.Data.AgentStatus" />
+          <EntitySet Name="AgentTypes" EntityType="Self.AgentType" />
+          <EntitySet Name="Intermediaries" EntityType="Self.Intermediary" />
+          <EntitySet Name="Licensees" EntityType="Self.Licensee" />
+          <EntitySet Name="LicenseeTypes" EntityType="Self.LicenseeType" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductUnderwriters" EntityType="Self.ProductUnderwriter" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="Underwriters" EntityType="Self.Underwriter" />
+          <AssociationSet Name="FK_Agent_AgentStatus" Association="Self.FK_Agent_AgentStatus">
+            <End Role="AgentStatus" EntitySet="AgentStatus1" />
+            <End Role="Agent" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_AgentType" Association="Self.FK_Agent_AgentType">
+            <End Role="AgentType" EntitySet="AgentTypes" />
+            <End Role="Agent" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Licensee" Association="Self.FK_Agent_Licensee">
+            <End Role="Licensee" EntitySet="Licensees" />
+            <End Role="Agent" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Agent" Association="Self.FK_Sale_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intermediary_Licensee" Association="Self.FK_Intermediary_Licensee">
+            <End Role="Licensee" EntitySet="Licensees" />
+            <End Role="Intermediary" EntitySet="Intermediaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Licensee_LicenseeType" Association="Self.FK_Licensee_LicenseeType">
+            <End Role="LicenseeType" EntitySet="LicenseeTypes" />
+            <End Role="Licensee" EntitySet="Licensees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Product1" Association="Self.FK_Product_Product1">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Product1" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductUnderwriter_Product" Association="Self.FK_ProductUnderwriter_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductUnderwriter" EntitySet="ProductUnderwriters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Product" Association="Self.FK_Sale_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductUnderwriter_Underwriter" Association="Self.FK_ProductUnderwriter_Underwriter">
+            <End Role="Underwriter" EntitySet="Underwriters" />
+            <End Role="ProductUnderwriter" EntitySet="ProductUnderwriters" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IntabaNetDataStoreContainer" CdmEntityContainer="IntabaNetData">
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="IntabaNet.Data.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LicenseeID" ColumnName="LicenseeID" />
+                <ScalarProperty Name="AgentTypeID" ColumnName="AgentTypeID" />
+                <ScalarProperty Name="AgentStatusID" ColumnName="AgentStatusID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgentStatus1">
+            <EntityTypeMapping TypeName="IntabaNet.Data.AgentStatus">
+              <MappingFragment StoreEntitySet="AgentStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgentTypes">
+            <EntityTypeMapping TypeName="IntabaNet.Data.AgentType">
+              <MappingFragment StoreEntitySet="AgentType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Intermediaries">
+            <EntityTypeMapping TypeName="IntabaNet.Data.Intermediary">
+              <MappingFragment StoreEntitySet="Intermediary">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LicenseeID" ColumnName="LicenseeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Licensees">
+            <EntityTypeMapping TypeName="IntabaNet.Data.Licensee">
+              <MappingFragment StoreEntitySet="Licensee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LicenseeTypeID" ColumnName="LicenseeTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LicenseeTypes">
+            <EntityTypeMapping TypeName="IntabaNet.Data.LicenseeType">
+              <MappingFragment StoreEntitySet="LicenseeType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="IntabaNet.Data.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductUnderwriters">
+            <EntityTypeMapping TypeName="IntabaNet.Data.ProductUnderwriter">
+              <MappingFragment StoreEntitySet="ProductUnderwriter">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="UnderwriterID" ColumnName="UnderwriterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="IntabaNet.Data.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Underwriters">
+            <EntityTypeMapping TypeName="IntabaNet.Data.Underwriter">
+              <MappingFragment StoreEntitySet="Underwriter">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

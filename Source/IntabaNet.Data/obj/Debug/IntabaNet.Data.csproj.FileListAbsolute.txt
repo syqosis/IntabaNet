@@ -1,0 +1,10 @@
+C:\Repository\GitHub\IntabaNet\IntabaNet.Data\bin\Debug\IntabaNet.Data.dll.config
+C:\Repository\GitHub\IntabaNet\IntabaNet.Data\bin\Debug\IntabaNet.Data.dll
+C:\Repository\GitHub\IntabaNet\IntabaNet.Data\bin\Debug\IntabaNet.Data.pdb
+C:\Repository\GitHub\IntabaNet\IntabaNet.Data\bin\Debug\EntityFramework.dll
+C:\Repository\GitHub\IntabaNet\IntabaNet.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Repository\GitHub\IntabaNet\IntabaNet.Data\bin\Debug\EntityFramework.xml
+C:\Repository\GitHub\IntabaNet\IntabaNet.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Repository\GitHub\IntabaNet\IntabaNet.Data\obj\Debug\IntabaNet.Data.csprojResolveAssemblyReference.cache
+C:\Repository\GitHub\IntabaNet\IntabaNet.Data\obj\Debug\IntabaNet.Data.dll
+C:\Repository\GitHub\IntabaNet\IntabaNet.Data\obj\Debug\IntabaNet.Data.pdb

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IntabaNetDataStoreContainer" CdmEntityContainer="IntabaNetData">
+    <EntitySetMapping Name="Agents">
+      <EntityTypeMapping TypeName="IntabaNet.Data.Agent">
+        <MappingFragment StoreEntitySet="Agent">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LicenseeID" ColumnName="LicenseeID" />
+          <ScalarProperty Name="AgentTypeID" ColumnName="AgentTypeID" />
+          <ScalarProperty Name="AgentStatusID" ColumnName="AgentStatusID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgentStatus1">
+      <EntityTypeMapping TypeName="IntabaNet.Data.AgentStatus">
+        <MappingFragment StoreEntitySet="AgentStatus">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgentTypes">
+      <EntityTypeMapping TypeName="IntabaNet.Data.AgentType">
+        <MappingFragment StoreEntitySet="AgentType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Intermediaries">
+      <EntityTypeMapping TypeName="IntabaNet.Data.Intermediary">
+        <MappingFragment StoreEntitySet="Intermediary">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LicenseeID" ColumnName="LicenseeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Licensees">
+      <EntityTypeMapping TypeName="IntabaNet.Data.Licensee">
+        <MappingFragment StoreEntitySet="Licensee">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LicenseeTypeID" ColumnName="LicenseeTypeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LicenseeTypes">
+      <EntityTypeMapping TypeName="IntabaNet.Data.LicenseeType">
+        <MappingFragment StoreEntitySet="LicenseeType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IntabaNet.Data.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductUnderwriters">
+      <EntityTypeMapping TypeName="IntabaNet.Data.ProductUnderwriter">
+        <MappingFragment StoreEntitySet="ProductUnderwriter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="UnderwriterID" ColumnName="UnderwriterID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales">
+      <EntityTypeMapping TypeName="IntabaNet.Data.Sale">
+        <MappingFragment StoreEntitySet="Sale">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Underwriters">
+      <EntityTypeMapping TypeName="IntabaNet.Data.Underwriter">
+        <MappingFragment StoreEntitySet="Underwriter">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
